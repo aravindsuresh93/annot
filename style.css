@@ -20,7 +20,7 @@
 }
 
 .item:hover {
-    cursor: grabbing;
+    /* cursor: grabbing; */
     opacity: 0.5;
 }
 

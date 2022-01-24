@@ -3,44 +3,91 @@ var enable_draw = false;
 let isResizing = false;
 let currentResizer;
 let currentParent;
-
+let deletemode = false
 
 
 function drawModeOn(){
     enable_draw = true
     document.body.style.cursor = "crosshair";
     canvas_area.addEventListener('mousedown', newmousedown)
+    SidebarRow = document.getElementById('draw');
+    SidebarRow.style.backgroundColor = "rgba(53, 42, 182, 0.05)";
 }
 
 function drawModeOff(){
     enable_draw = false
     document.body.style.cursor = "default";
     canvas_area.removeEventListener('mousedown', newmousedown)
+    SidebarRow = document.getElementById('draw');
+    SidebarRow.style.backgroundColor = "#F5F5F5";
 }
 
-function switchDrawMode(e) {
-    if (e.key === 'w' && enable_draw == false) {
-        drawModeOn()
+function deleteModeOn(){
+    deletemode = true
+    document.body.style.cursor = "not-allowed";
+    SidebarRow = document.getElementById('remove_button');
+    SidebarRow.style.backgroundColor = "rgba(53, 42, 182, 0.05)";
+}
+
+function deleteModeOff(){
+    deletemode = false
+    document.body.style.cursor = "default";
+    SidebarRow = document.getElementById('remove_button');
+    SidebarRow.style.backgroundColor = "#F5F5F5";
+
+}
+
+function clearModes(){
+    drawModeOff()
+    deleteModeOff()
+}
+
+function keyChecker(e) {
+    if (e.key == "Escape"){
+        clearModes()
     }
-    else if (e.key === 'w' && enable_draw == true) {
-        drawModeOff()
+    else if (e.key === 'w'){
+        if(!enable_draw){clearModes();}
+        drawButton();
     }
+    else if (e.key === 'x'){
+        if(!deletemode){clearModes();}
+        removeButton();
+    } 
 }
 
 function drawButton(){
     if(enable_draw){
-        drawModeOff()
+        drawModeOff();
     }else{
-        drawModeOn()
+        drawModeOn();
     }
 }
 
+function removeButton(){
+    if(deletemode){
+        deleteModeOff();
+    }else{
+        deleteModeOn();
+    }
+}
+
+// Listeners
 export_button = document.getElementById("draw")
 export_button.addEventListener('click', drawButton)
+remove_button = document.getElementById("remove_button")
+remove_button.addEventListener('click', removeButton)
+document.addEventListener('keyup', keyChecker, false);
 
-document.addEventListener('keyup', switchDrawMode, false);
+// Event Capture
 
 function mousedown(e){
+
+    if(deletemode){
+        el = e.target;
+        el.remove();
+    }
+
     window.addEventListener('mousemove', mousemove);
     window.addEventListener('mouseup', mouseup);
 
