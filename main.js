@@ -27,6 +27,17 @@ function switchDrawMode(e) {
     }
 }
 
+function drawButton(){
+    if(enable_draw){
+        drawModeOff()
+    }else{
+        drawModeOn()
+    }
+}
+
+export_button = document.getElementById("draw")
+export_button.addEventListener('click', drawButton)
+
 document.addEventListener('keyup', switchDrawMode, false);
 
 function mousedown(e){
@@ -36,6 +47,10 @@ function mousedown(e){
     let prevX = e.clientX;
     let prevY = e.clientY;
 
+    const rect = canvas_area.getBoundingClientRect();
+    X = rect.left ;
+    Y = rect.top ;
+
     el = e.target
 
     function mousemove(e){
@@ -44,8 +59,8 @@ function mousedown(e){
             let newY = prevY - e.clientY;
 
             const rect = el.getBoundingClientRect();
-            el.style.left = rect.left - newX + "px";
-            el.style.top = rect.top - newY + "px";
+            el.style.left = rect.left - newX - X+ "px";
+            el.style.top = rect.top - newY - Y+ "px";
 
             prevX = e.clientX;
             prevY = e.clientY;
@@ -92,19 +107,23 @@ function newmousedown(e){
     boxdiv.appendChild(se);
     boxdiv.appendChild(sw);
     boxdiv.appendChild(txt);
-    
 
-    let newBoxX1 = e.clientX;
-    let newBoxY1 = e.clientY;
+    const rect = canvas_area.getBoundingClientRect();
+    X = rect.left ;
+    Y = rect.top ;
+    
+    let newBoxX1 = e.clientX - X;
+    let newBoxY1 = e.clientY - Y;
 
     boxdiv.style.left = newBoxX1  + "px";
     boxdiv.style.top = newBoxY1 + "px";
 
     canvas_area.appendChild(boxdiv)
+    
 
     function newmousemove(e){
-        boxdiv.style.width = e.clientX - newBoxX1 + "px";
-        boxdiv.style.height = e.clientY - newBoxY1  +  "px";
+        boxdiv.style.width = e.clientX - newBoxX1 - X+ "px";
+        boxdiv.style.height = e.clientY - newBoxY1 - Y +  "px";
 
         newBoxX = e.clientX;
         newBoxY = e.clientY;
@@ -152,7 +171,6 @@ function resmousedown(e){
     function resmousemove(e){
         const rect = currentParent.getBoundingClientRect()
         if (currentResizer.classList.contains('se')){
-            console.log('se', rect.width, prevX, e.clientX)
             currentParent.style.width = rect.width - (prevX - e.clientX) + "px";
             currentParent.style.height = rect.height - (prevY - e.clientY) + "px";
         } else if (currentResizer.classList.contains("sw")) {
@@ -188,20 +206,47 @@ function resmousedown(e){
 export_button = document.getElementById("export")
 export_button.addEventListener('click', export_values)
 
+
+function downloadString(text, fileName) {
+    var blob = new Blob([text], { type: "text/csv" });
+  
+    var a = document.createElement('a');
+    a.download = fileName;
+    a.href = URL.createObjectURL(blob);
+    a.dataset.downloadurl = ["text/csv", a.download, a.href].join(':');
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
+  }
+  
+  // downloadString("a,b,c\n1,2,3","myCSV.csv")
+
+function getYoloText(boxes){
+    yoloText = ""
+    for (let box of boxes){
+        label = box.querySelector('.class_label').value
+        x1 = parseInt(box.style.left);
+        y1 = parseInt(box.style.top);
+        w = parseInt(box.style.width);
+        h = parseInt(box.style.height) ;
+    
+        yoloText = yoloText + label + " " + x1 + " " + y1 + " " + w + " " + h + "\n"
+    }
+    return yoloText
+}
+
+
 function export_values(){
     boxes = document.querySelectorAll(".item")
     const rect = canvas_area.getBoundingClientRect();
-    X = rect.top ;
-    Y = rect.left ;
-    console.log(X,Y)
-    for (let box of boxes){
-        label = box.querySelector('.class_label').value
-        x1 = parseInt(box.style.left) - X;
-        y1 = parseInt(box.style.top) - Y;
-        w = box.style.width;
-        h = box.style.height ;
-        console.log('x1',x1,'y1',y1,'w',w,'h',h, label)
-    }
+    X = rect.left ;
+    Y = rect.top ;
+
+    export_text = getYoloText(boxes)
+    
+    downloadString(export_text, "out.txt")
 
 }
 

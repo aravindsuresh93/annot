@@ -1,0 +1,73 @@
+/* CSS */
+
+@import url("http://fonts.googleapis.com/css?family=Lato:400,700");
+@import url("http://fonts.googleapis.com/css?family=Lexend+Deca");
+
+body{
+    font-family: 'Lato', cursive;
+    color : #352AB6;
+
+}
+
+.svg_logo{
+    width:20px;
+    height: 20px;
+}
+
+.heading{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding: auto;
+}
+
+.headingText{
+    font-size: 16px;
+    padding-left: 5px;
+    font-family: 'Lexend Deca';
+    
+}
+
+.heading:hover{
+    cursor: pointer;
+}
+
+.Sidebar{
+    position: fixed;
+    padding-top: 100px;
+    height: 100%;
+    width: 12%;
+    background-color: #F5F5F5;
+}
+
+.SidebarList{
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+.SidebarRow {
+    font-size: 14px;
+    flex-direction:row;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.SidebarText{
+    padding-left: 10px;
+}
+
+.SidebarRow:hover{
+    background-color: rgba(53, 42, 182, 0.05);
+    cursor: pointer;
+}
+
+.Export{
+    padding-left: 40px;
+    margin-top: 500px;
+
+    
+}
