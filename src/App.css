@@ -1,0 +1,88 @@
+@import url("http://fonts.googleapis.com/css?family=Lato:400,700");
+@import url("http://fonts.googleapis.com/css?family=Lexend+Deca");
+
+.App {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Lato', cursive;
+    color : #352AB6;
+}
+
+svg{
+    width:17px;
+    height: 17px;
+}
+
+
+body{
+    margin : 0px;
+    padding : 0px;
+}
+
+.heading{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding: auto;
+}
+
+.headingText{
+    font-size: 20px;
+    padding-right: 5px;
+    font-family: 'Lexend Deca';
+}
+
+
+.Sidebar{
+    position: fixed;
+    padding-top: 80px;
+    height: 100%;
+    width: 150px;
+    background-color: #F5F5F5;
+}
+
+.SidebarList{
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+.row {
+    font-size: 14px;
+    flex-direction: column;
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+}
+
+.row:hover{
+    background-color: rgba(53, 42, 182, 0.05);
+}
+
+.draggable-canvas{
+    position: fixed;
+    background-color: rgba(53, 42, 182, 0.05);  
+    width: 70%;
+    height: 80%;
+    margin-left: 15%;
+    margin-top: 10px;
+    padding: 0%;
+
+}
+
+.coordinates{
+    position: fixed;
+    font-size: 10px;
+    color: black;
+    bottom: 0;
+    text-align:center;
+    
+}
+
+.viz{
+    position: fixed;
+    height: 100%;
+    width: 150px;
+}
