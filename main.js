@@ -289,6 +289,9 @@ function downloadString(text, fileName) {
   // downloadString("a,b,c\n1,2,3","myCSV.csv")
 
 function getYoloText(boxes){
+    var myCanvas = document.getElementById("imageCanvas");
+    var H = myCanvas.height;
+    var W = myCanvas.width
     yoloText = ""
     for (let box of boxes){
         label = box.querySelector('.class_label').value
@@ -296,11 +299,20 @@ function getYoloText(boxes){
         y1 = parseInt(box.style.top);
         w = parseInt(box.style.width);
         h = parseInt(box.style.height) ;
-    
-        yoloText = yoloText + label + " " + x1 + " " + y1 + " " + w + " " + h + "\n"
+        dw = 1/W;
+        dh = 1/H;
+        x = (x1 + x1 + w)/2;
+        y = (y1+ y1 + h)/2;
+        x = x*dw;
+        w = w*dw;
+        y = y*dh;
+        h = h*dh;
+        console.log(H, W, dw, dh,x,y)
+        yoloText = yoloText + label + " " + x.toFixed(6) + " " + y.toFixed(6) + " " + w.toFixed(6) + " " + h.toFixed(6) + "\n"
     }
     return yoloText
 }
+
 
 
 function export_values(){
@@ -344,7 +356,6 @@ let imgInput = document.getElementById('imageLoader');
 imgInput.addEventListener('change', handleImage, false)
 
 function handleImage (e) {
-    console.log(e.target.files);
     if(e.target.files) {
       let imageFile = e.target.files[0]; //here we get the image file
       var reader = new FileReader();
@@ -354,9 +365,15 @@ function handleImage (e) {
         myImage.src = e.target.result; // Assigns converted image to image object
         myImage.onload = function(ev) {
           var myCanvas = document.getElementById("imageCanvas"); // Creates a canvas object
+          var backCanvas = document.getElementById("canvas_area");
           var myContext = myCanvas.getContext("2d"); // Creates a contect object
-          myCanvas.width = myImage.width; // Assigns image's width to canvas
+          myCanvas.width = myImage.width ; // Assigns image's width to canvas
           myCanvas.height = myImage.height; // Assigns image's height to canvas
+
+          backCanvas.style.width = myImage.width + "px"; 
+          backCanvas.style.height = myImage.height + "px"; 
+            
+
           myContext.drawImage(myImage,0,0); // Draws the image on canvas
         }
       }

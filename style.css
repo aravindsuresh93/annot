@@ -24,7 +24,7 @@ canvas{
 
 .item:hover {
     /* cursor: grabbing; */
-    background-color:rgba(114, 253, 49, 0.7);
+    background-color:rgba(114, 253, 49, 0.5);
 }
 
 .item:hover .delbutton {

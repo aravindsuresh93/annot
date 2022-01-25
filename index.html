@@ -29,18 +29,15 @@
                 <input id="imageLoader" type="file" name="imageLoader" style="display:none" />
             </li>
 
-            <li key="NavigateNext" class="SidebarRow">
+            <li key="NavigateNext" class="SidebarRow disabled">
                 <i class="material-icons">navigate_next</i>
                 <div class="SidebarText">Next Image</div>
             </li>
 
-            <li key="NavigatePrevious" class="SidebarRow">
+            <li key="NavigatePrevious" class="SidebarRow disabled">
                 <i class="material-icons">navigate_before</i>
                 <div class="SidebarText">Previous Image</div>
             </li>
-
-
-           
 
             
             <li key="ExportAnnotations" class="SidebarRow Export" id='export' >
@@ -57,12 +54,11 @@
         
     </div>
 
-    <div class='canvas_area'>
+    <div class='canvas_area' id="canvas_area">
     <canvas id="imageCanvas" ></canvas>
     </div>
 
 
-    <input type="file"  name="imageLoader"/>
     
 
 </body>

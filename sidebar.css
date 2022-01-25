@@ -72,7 +72,10 @@ body{
     padding-left: 40px;
     margin-top: 400px;
 
-    
+}
+
+.disabled{
+    opacity: 0.2;
 }
 
 /* input[type=file]::file-selector-button {
