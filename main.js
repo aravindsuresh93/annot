@@ -43,14 +43,17 @@ function clearModes(){
 }
 
 function keyChecker(e) {
-    if (e.key == "Escape"){
+    if (e.key.toLowerCase() == "Escape"){
         clearModes()
     }
-    else if (e.key === 'w'){
+    else if (["u", "U"].includes(e.key)){
+        document.getElementById('imageLoader').click()
+    }
+    else if (["w", "W"].includes(e.key)){
         if(!enable_draw){clearModes();}
         drawButton();
     }
-    else if (e.key === 'x'){
+    else if (["x", "X"].includes(e.key)){
         if(!deletemode){clearModes();}
         removeButton();
     } 
@@ -123,6 +126,14 @@ function mousedown(e){
 }
 
 
+function resizable (el, factor) {
+    var int = Number(factor) || 7.7;
+    function resize() {el.style.width = ((el.value.length+1) * int) + 'px'}
+    var e = 'keyup,keypress,focus,blur,change'.split(',');
+    for (var i in e) el.addEventListener(e[i],resize,false);
+    resize();
+  }
+
 function newmousedown(e){
     window.addEventListener('mousemove', newmousemove);
     window.addEventListener('mouseup', newmouseup);
@@ -189,6 +200,9 @@ function newmousedown(e){
         boxdiv.addEventListener('mousedown', mousedown)
         window.removeEventListener('mousemove', newmousemove)
         window.removeEventListener('mouseup', newmouseup)
+        
+        resizable(txt, 7)
+        txt.focus()
 
         drawModeOff()
 
@@ -302,5 +316,51 @@ function export_values(){
 }
 
 
+
+// Image Upload
+
+// var imageLoader = document.getElementById('imageLoader');
+// imageLoader.addEventListener('click', handleImage, false);
+// var canvas = document.getElementById('imageCanvas');
+// var ctx = canvas.getContext('2d');
+
+
+// function handleImage(e) {
+//   console.log('yo')
+//   var reader = new FileReader();
+//   reader.onload = function(event) {
+//     var img = new Image();
+//     img.onload = function() {
+//       canvas.width = img.width;
+//       canvas.height = img.height;
+//       ctx.drawImage(img, 0, 0);
+//     }
+//     img.src = event.target.result;
+//   }
+//   reader.readAsDataURL(e.target.files[0]);
+// }
+
+let imgInput = document.getElementById('imageLoader');
+imgInput.addEventListener('change', handleImage, false)
+
+function handleImage (e) {
+    console.log(e.target.files);
+    if(e.target.files) {
+      let imageFile = e.target.files[0]; //here we get the image file
+      var reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+      reader.onloadend = function (e) {
+        var myImage = new Image(); // Creates image object
+        myImage.src = e.target.result; // Assigns converted image to image object
+        myImage.onload = function(ev) {
+          var myCanvas = document.getElementById("imageCanvas"); // Creates a canvas object
+          var myContext = myCanvas.getContext("2d"); // Creates a contect object
+          myCanvas.width = myImage.width; // Assigns image's width to canvas
+          myCanvas.height = myImage.height; // Assigns image's height to canvas
+          myContext.drawImage(myImage,0,0); // Draws the image on canvas
+        }
+      }
+    }
+  };
 
 

@@ -1,3 +1,7 @@
+canvas{
+    z-index: -10;
+}
+
 .canvas_area{
     height : 500px;
     width : 1000px;
@@ -13,15 +17,14 @@
     height: 10px;
     width: 10px;
     position: absolute;
-    background-color: rgb(112, 247, 94);
+    background-color: rgba(114, 253, 49, 0.5);
     border-width: 3px;
-    opacity: 0.3;
     z-index: 1;
 }
 
 .item:hover {
     /* cursor: grabbing; */
-    opacity: 0.5;
+    background-color:rgba(114, 253, 49, 0.7);
 }
 
 .item:hover .delbutton {
@@ -71,11 +74,18 @@
 }
 
 .class_label{
+    border-radius: 2px;
+    padding-right: -10px;
+    transition: width 0.3s;
     position: absolute;
     top : -20px;
-    background: transparent;
+    background: rgb(97, 97, 97);
+    width:5px;
     border: none;
+    /* font-weight: bold; */
     font-size: 16px;
+    color:rgb(235, 235, 235);
+    opacity: 0.8;
 }
 
 .delbutton {

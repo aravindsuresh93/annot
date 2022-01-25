@@ -23,6 +23,12 @@
                 <div class="SidebarText">Remove Box</div>
             </li>
 
+            <li key="UploadImage" class="SidebarRow" onclick="document.getElementById('imageLoader').click()">
+                <i class="material-icons">keyboard_arrow_up</i>
+                <div id="id" class="SidebarText">Open Image</div>
+                <input id="imageLoader" type="file" name="imageLoader" style="display:none" />
+            </li>
+
             <li key="NavigateNext" class="SidebarRow">
                 <i class="material-icons">navigate_next</i>
                 <div class="SidebarText">Next Image</div>
@@ -33,6 +39,10 @@
                 <div class="SidebarText">Previous Image</div>
             </li>
 
+
+           
+
+            
             <li key="ExportAnnotations" class="SidebarRow Export" id='export' >
                 <i class="material-icons">cloud_download</i>
                 <div class="SidebarText">Export</div>
@@ -47,7 +57,13 @@
         
     </div>
 
-    <div class='canvas_area'></div>
+    <div class='canvas_area'>
+    <canvas id="imageCanvas" ></canvas>
+    </div>
+
+
+    <input type="file"  name="imageLoader"/>
+    
 
 </body>
 <script src="main.js"></script>
