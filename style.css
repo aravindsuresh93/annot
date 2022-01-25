@@ -1,6 +1,6 @@
 .canvas_area{
     height : 500px;
-    width : 900px;
+    width : 1000px;
     background-color: rgba(53, 42, 182, 0.05);
     z-index: 0;
     position: absolute;
@@ -85,7 +85,7 @@
     display: none;
     z-index: 2;
     opacity: 0.5;
-    color:red;
+    color:black;
 }
 
 .delbutton:hover{

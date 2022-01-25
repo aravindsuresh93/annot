@@ -215,6 +215,10 @@ function resmousedown(e){
     window.addEventListener('mousemove', resmousemove);
     window.addEventListener('mouseup', resmouseup);
 
+    const canrect = canvas_area.getBoundingClientRect();
+    X = canrect.left ;
+    Y = canrect.top ;
+
     function resmousemove(e){
         const rect = currentParent.getBoundingClientRect()
         if (currentResizer.classList.contains('se')){
@@ -223,16 +227,16 @@ function resmousedown(e){
         } else if (currentResizer.classList.contains("sw")) {
             currentParent.style.width = rect.width + (prevX - e.clientX) + "px";
             currentParent.style.height = rect.height - (prevY - e.clientY) + "px";
-            currentParent.style.left = rect.left - (prevX - e.clientX) + "px";
+            currentParent.style.left = rect.left - (prevX - e.clientX) - X + "px";
         } else if (currentResizer.classList.contains("ne")) {
             currentParent.style.width = rect.width - (prevX - e.clientX) + "px";
             currentParent.style.height = rect.height + (prevY - e.clientY) + "px";
-            currentParent.style.top = rect.top - (prevY - e.clientY) + "px";
+            currentParent.style.top = rect.top - (prevY - e.clientY) -Y + "px";
           } else {
             currentParent.style.width = rect.width + (prevX - e.clientX) + "px";
             currentParent.style.height = rect.height + (prevY - e.clientY) + "px";
-            currentParent.style.top = rect.top - (prevY - e.clientY) + "px";
-            currentParent.style.left = rect.left - (prevX - e.clientX) + "px";
+            currentParent.style.top = rect.top - (prevY - e.clientY) - Y+ "px";
+            currentParent.style.left = rect.left - (prevX - e.clientX) -X+ "px";
           }
 
 
