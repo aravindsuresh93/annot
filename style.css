@@ -1,0 +1,104 @@
+canvas{
+    z-index: -10;
+}
+
+.canvas_area{
+    height : 500px;
+    width : 1000px;
+    background-color: rgba(53, 42, 182, 0.05);
+    z-index: 0;
+    position: absolute;
+    top: 110px;
+    left: 15%;
+    
+}
+
+.item {
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    background-color: rgba(114, 253, 49, 0.5);
+    border-width: 3px;
+    z-index: 1;
+}
+
+.item:hover {
+    /* cursor: grabbing; */
+    background-color:rgba(114, 253, 49, 0.5);
+}
+
+.item:hover .delbutton {
+    display: block;
+  }
+
+.item:hover .resizer {
+    display: block;
+  }
+
+.resizer {
+    position : absolute;
+    width : 10px;
+    height : 10px;
+    background-color: black;
+    opacity: 0.7;
+    z-index: 2;
+    display: none;
+}
+
+.nw{
+    top : -1px;
+    left: -1px;
+    cursor: nw-resize;
+
+}
+
+.ne{
+    top : -1px;
+    right:-1px;
+    cursor: ne-resize;
+    
+}
+
+.sw{
+    bottom : -1px;
+    left:-1px;
+    cursor: sw-resize;
+    
+}
+
+.se{
+    bottom : -1px;
+    right: -1px;
+    cursor: se-resize;
+    
+}
+
+.class_label{
+    border-radius: 2px;
+    padding-right: -10px;
+    transition: width 0.3s;
+    position: absolute;
+    top : -20px;
+    background: rgb(97, 97, 97);
+    width:5px;
+    border: none;
+    /* font-weight: bold; */
+    font-size: 16px;
+    color:rgb(235, 235, 235);
+    opacity: 0.8;
+}
+
+.delbutton {
+    position: absolute;
+    top:75%;
+    left: 45%;
+    display: none;
+    z-index: 2;
+    opacity: 0.5;
+    color:black;
+}
+
+.delbutton:hover{
+    opacity: 1;
+    cursor: pointer;
+}
