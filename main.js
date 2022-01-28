@@ -43,7 +43,7 @@ function clearModes(){
 }
 
 function keyChecker(e) {
-    if (e.key.toLowerCase() == "Escape"){
+    if (e.key == "Escape"){
         clearModes()
     }
     else if (["u", "U"].includes(e.key)){

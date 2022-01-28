@@ -2,9 +2,10 @@
 
 @import url("http://fonts.googleapis.com/css?family=Lato:400,700");
 @import url("http://fonts.googleapis.com/css?family=Lexend+Deca");
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
 
 body{
-    font-family: 'Lato', cursive;
+    font-family: 'Maven Pro', sans-serif;
     color : #352AB6;
 
 }
@@ -24,7 +25,7 @@ body{
 .headingText{
     font-size: 16px;
     padding-right: 5px;
-    font-family: 'Lexend Deca';
+    /* font-family: 'Lexend Deca'; */
     
 }
 
