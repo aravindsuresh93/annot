@@ -11,50 +11,62 @@
     
 </head>
 <body>
-    <div class="Sidebar">
-        <ul class = "SidebarList">
-            <li key="NewBox" class="SidebarRow" id='draw'>
-                <i class="material-icons">check_box_outline_blank</i>
-                <div class="SidebarText">New Box</div>
-            </li>
+    <div id="all_back">
+        <div class="Sidebar">
+            <ul class = "SidebarList">
+                <li key="NewBox" class="SidebarRow" id='draw'>
+                    <i class="material-icons">check_box_outline_blank</i>
+                    <div class="SidebarText">New Box</div>
+                </li>
 
-            <li key="NavigateNext" class="SidebarRow" id="remove_button">
-                <i class="material-icons">close</i>
-                <div class="SidebarText">Remove Box</div>
-            </li>
+                <li key="NavigateNext" class="SidebarRow" id="remove_button">
+                    <i class="material-icons">close</i>
+                    <div class="SidebarText">Remove Box</div>
+                </li>
 
-            <li key="UploadImage" class="SidebarRow" onclick="document.getElementById('imageLoader').click()">
-                <i class="material-icons">keyboard_arrow_up</i>
-                <div id="id" class="SidebarText">Open Image</div>
-                <input id="imageLoader" type="file" name="imageLoader" style="display:none" />
-            </li>
+                <li key="UploadImage" class="SidebarRow" onclick="document.getElementById('imageLoader').click()">
+                    <i class="material-icons">keyboard_arrow_up</i>
+                    <div id="id" class="SidebarText">Open Image</div>
+                    <input id="imageLoader" type="file" name="imageLoader" style="display:none" />
+                </li>
 
-            <li key="NavigateNext" class="SidebarRow disabled">
-                <i class="material-icons">navigate_next</i>
-                <div class="SidebarText">Next Image</div>
-            </li>
+                <li key="NavigateNext" class="SidebarRow disabled">
+                    <i class="material-icons">navigate_next</i>
+                    <div class="SidebarText">Next Image</div>
+                </li>
 
-            <li key="NavigatePrevious" class="SidebarRow disabled">
-                <i class="material-icons">navigate_before</i>
-                <div class="SidebarText">Previous Image</div>
-            </li>
+                <li key="NavigatePrevious" class="SidebarRow disabled">
+                    <i class="material-icons">navigate_before</i>
+                    <div class="SidebarText">Previous Image</div>
+                </li>
 
-            
-            <li key="ExportAnnotations" class="SidebarRow Export" id='export' >
-                <i class="material-icons">cloud_download</i>
-                <div class="SidebarText">Export</div>
-            </li>
-        </ul>
+                
+                <li key="ExportAnnotations" class="SidebarRow Export" id='export' >
+                    <i class="material-icons">cloud_download</i>
+                    <div class="SidebarText">Export</div>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="heading" onclick="location.href='home.html'">
+            <h3 class="headingText">annot</h3>
+            <img src='annot-icon.svg' class='svg_logo'>
+        </div>
+
+        <div class='canvas_area' id="canvas_area">
+        <canvas id="imageCanvas" ></canvas>
+        </div>
+
     </div>
 
 
-    <div class="heading" onclick="location.href='home.html'">
-        <h3 class="headingText">annot</h3>
-        <img src='annot-icon.svg' class='svg_logo'>
-    </div>
-
-    <div class='canvas_area' id="canvas_area">
-    <canvas id="imageCanvas" ></canvas>
+    <div class="form-popup" id="myForm">
+      <form action="" class="form-container">
+          <div>Choose Format</div>
+          <i class="material-icons popupclose" onclick="exportCloseForm()">close</i>
+        <div class="btn" id="YoloExport">YOLO</div>
+      </form>
     </div>
 
 

@@ -4,6 +4,7 @@ let isResizing = false;
 let currentResizer;
 let currentParent;
 let deletemode = false
+var currentImageName = ""
 
 
 function drawModeOn(){
@@ -76,10 +77,12 @@ function removeButton(){
 }
 
 // Listeners
-export_button = document.getElementById("draw")
-export_button.addEventListener('click', drawButton)
+draw_button = document.getElementById("draw")
+draw_button.addEventListener('click', drawButton)
+
 remove_button = document.getElementById("remove_button")
 remove_button.addEventListener('click', removeButton)
+
 document.addEventListener('keyup', keyChecker, false);
 
 // Event Capture
@@ -269,12 +272,14 @@ function resmousedown(e){
 
 
 export_button = document.getElementById("export")
-export_button.addEventListener('click', export_values)
+export_button.addEventListener('click', exportOpenForm)
+
+yolo_export_button = document.getElementById("YoloExport")
+yolo_export_button.addEventListener('click', ExportYolo)
 
 
 function downloadString(text, fileName) {
     var blob = new Blob([text], { type: "text/csv" });
-  
     var a = document.createElement('a');
     a.download = fileName;
     a.href = URL.createObjectURL(blob);
@@ -286,9 +291,11 @@ function downloadString(text, fileName) {
     setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
   }
   
-  // downloadString("a,b,c\n1,2,3","myCSV.csv")
+  
 
-function getYoloText(boxes){
+function ExportYolo(){
+    console.log('exporting')
+    boxes = document.querySelectorAll(".item")
     var myCanvas = document.getElementById("imageCanvas");
     var H = myCanvas.height;
     var W = myCanvas.width
@@ -310,47 +317,17 @@ function getYoloText(boxes){
         console.log(H, W, dw, dh,x,y)
         yoloText = yoloText + label + " " + x.toFixed(6) + " " + y.toFixed(6) + " " + w.toFixed(6) + " " + h.toFixed(6) + "\n"
     }
-    return yoloText
+    if (yoloText.length){
+        downloadString(yoloText, currentImageName + ".txt")
+    }else{
+        console.log("nothing")
+    }
+    exportCloseForm()
 }
 
 
 
-function export_values(){
-    boxes = document.querySelectorAll(".item")
-    const rect = canvas_area.getBoundingClientRect();
-    X = rect.left ;
-    Y = rect.top ;
-
-    export_text = getYoloText(boxes)
-    
-    downloadString(export_text, "out.txt")
-
-}
-
-
-
-// Image Upload
-
-// var imageLoader = document.getElementById('imageLoader');
-// imageLoader.addEventListener('click', handleImage, false);
-// var canvas = document.getElementById('imageCanvas');
-// var ctx = canvas.getContext('2d');
-
-
-// function handleImage(e) {
-//   console.log('yo')
-//   var reader = new FileReader();
-//   reader.onload = function(event) {
-//     var img = new Image();
-//     img.onload = function() {
-//       canvas.width = img.width;
-//       canvas.height = img.height;
-//       ctx.drawImage(img, 0, 0);
-//     }
-//     img.src = event.target.result;
-//   }
-//   reader.readAsDataURL(e.target.files[0]);
-// }
+// Image upload
 
 let imgInput = document.getElementById('imageLoader');
 imgInput.addEventListener('change', handleImage, false)
@@ -358,6 +335,7 @@ imgInput.addEventListener('change', handleImage, false)
 function handleImage (e) {
     if(e.target.files) {
       let imageFile = e.target.files[0]; //here we get the image file
+      currentImageName = imageFile.name.split('.').slice(0, -1).join('.')
       var reader = new FileReader();
       reader.readAsDataURL(imageFile);
       reader.onloadend = function (e) {
@@ -373,11 +351,22 @@ function handleImage (e) {
           backCanvas.style.width = myImage.width + "px"; 
           backCanvas.style.height = myImage.height + "px"; 
             
-
           myContext.drawImage(myImage,0,0); // Draws the image on canvas
         }
       }
     }
   };
+
+
+// POPUP
+  function exportOpenForm() {
+    document.getElementById("myForm").style.display = "block";
+    document.getElementById("all_back").style.opacity = "0.4";
+  }
+  
+  function exportCloseForm() {
+    document.getElementById("myForm").style.display = "none";
+    document.getElementById("all_back").style.opacity = "1";
+  }
 
 
